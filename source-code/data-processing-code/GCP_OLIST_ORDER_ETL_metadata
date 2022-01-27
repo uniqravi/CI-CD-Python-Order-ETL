@@ -1,0 +1,19 @@
+{
+  "description": "An pipeline that perform order ETL operation",
+  "name": "GCP_OLIST_ORDER_ETL",
+  "parameters": [
+    {
+      "regexes": [
+        "^gs:\\/\\/[^\\n\\r]+$"
+      ],
+      "name": "input",
+      "helpText": "Path of the file pattern glob to read from - for example gs://bucketname/product.csv",
+      "label": "Input Cloud Storage file(s)"
+    },
+    {
+      "name": "project_nm",
+      "helpText": "project id",
+      "label": "project id"
+    }
+  ]
+}

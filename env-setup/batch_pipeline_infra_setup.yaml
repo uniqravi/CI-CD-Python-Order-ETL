@@ -1,8 +1,11 @@
 
 imports:
 - path: create_big_query_dataset.py
+  name: create_big_query_dataset.py
 - path: create_big_query_table.py
+  name: create_big_query_table.py
 - path: create_bucket.py
+  name: create_bucket.py
 #- path: compute-engine-template.py : gcp-learning-333002@appspot.gserviceaccount.com
 
 resources:
@@ -15,35 +18,35 @@ resources:
         - role: OWNER
           userByEmail: ravi.khandelwal23@gmail.com
   - name: olist-order
-      type: create_big_query_table.py
-      properties:
-        name: olist-order
-        dependsOn:
+    type: create_big_query_table.py
+    properties:
+      name: olist-order
+      dependsOn:
           - olist-demo-dataset
-        datasetId: $(ref.olist-demo-dataset.datasetId)
-        schema:
-          - name: order_id
-            type: STRING
-          - name: customer_id
-            type: STRING
-          - name: order_status
-            type: INTEGER
-          - name: order_purchase_timestamp
-            type: DATETIME
-          - name: order_approved_at
-            type: DATETIME
-          - name: order_delivered_carrier_date
-            type: DATETIME
-          - name: order_delivered_customer_date
-            type: DATETIME
-          - name: order_estimated_delivery_date
-            type: DATETIME
+      datasetId: $(ref.olist-demo-dataset.datasetId)
+      schema:
+        - name: order_id
+          type: STRING
+        - name: customer_id
+          type: STRING
+        - name: order_status
+          type: INTEGER
+        - name: order_purchase_timestamp
+          type: DATETIME
+        - name: order_approved_at
+          type: DATETIME
+        - name: order_delivered_carrier_date
+          type: DATETIME
+        - name: order_delivered_customer_date
+          type: DATETIME
+        - name: order_estimated_delivery_date
+          type: DATETIME
   - name: olist_order_bucket_etl
-      type: create_bucket.py
-      properties:
-        name: olist_order_bucket_etl
-        location: us-west1
-        versioning:
-          enabled: False
-        labels:
+    type: create_bucket.py
+    properties:
+      name: olist_order_bucket_etl
+      location: us-west1
+      versioning:
+        enabled: False
+      labels:
           env: development

@@ -16,7 +16,7 @@ resources:
       location: us-west1
       access:
         - role: OWNER
-          userByEmail: ravi.khandelwal23@gmail.com
+          userByEmail: 73840137188@cloudservices.gserviceaccount.com
   - name: olist-order
     type: create_big_query_table.py
     properties:

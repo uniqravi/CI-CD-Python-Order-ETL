@@ -15,8 +15,8 @@ resources:
       name: olist_demo_dataset
       location: us-west1
       access:
-        - role: OWNER
-          userByEmail: 73840137188@cloudservices.gserviceaccount.com
+        - role: EDITOR
+          userByEmail: gcp-learning-333002@appspot.gserviceaccount.com
   - name: olist-order
     type: create_big_query_table.py
     properties:

@@ -12,7 +12,7 @@ resources:
   - name: olist-demo-dataset
     type: create_big_query_dataset.py
     properties:
-      name: olist-demo-dataset
+      name: olist_demo_dataset
       location: us-west1
       access:
         - role: OWNER
@@ -20,7 +20,7 @@ resources:
   - name: olist-order
     type: create_big_query_table.py
     properties:
-      name: olist-order
+      name: olist_order
       dependsOn:
           - olist-demo-dataset
       datasetId: $(ref.olist-demo-dataset.datasetId)

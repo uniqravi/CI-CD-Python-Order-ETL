@@ -24,7 +24,7 @@ def dataflow_exec(file, context):
     # user defined parameters to pass to the dataflow pipeline job
     parameters = {
         'input': inputFile,
-        'project_nm': project,
+       # 'project_nm': project,
     }
     # tempLocation is the path on GCS to store temp files generated during the dataflow job
     environment = {

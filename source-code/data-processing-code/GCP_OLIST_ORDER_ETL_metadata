@@ -9,11 +9,6 @@
       "name": "input",
       "helpText": "Path of the file pattern glob to read from - for example gs://bucketname/product.csv",
       "label": "Input Cloud Storage file(s)"
-    },
-    {
-      "name": "project_nm",
-      "helpText": "project id",
-      "label": "project id"
     }
   ]
 }

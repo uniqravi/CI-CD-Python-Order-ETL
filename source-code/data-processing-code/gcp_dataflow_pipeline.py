@@ -14,8 +14,8 @@ class OlistDatasetOptions(PipelineOptions):
             '--input',
             default='gs://dataflow-samples/shakespeare/kinglear.txt',
             help='Path of the file to read from')
-        parser.add_value_provider_argument(
-            '--project_nm',
+        parser.add_argument(
+            '--project',
             default='gcp-learning-333002',
             help='project id')
 
@@ -41,7 +41,7 @@ if __name__ == '__main__':
                                'order_approved_at':datetime.strptime(x[4], "%y-%m-%d %H:%M:%S"),'order_delivered_carrier_date':datetime.strptime(x[5], "%y-%m-%d %H:%M:%S"),
                                'order_delivered_customer_date':datetime.strptime(x[6], "%y-%m-%d %H:%M:%S"),'order_estimated_delivery_date':datetime.strptime(x[7], "%y-%m-%d %H:%M:%S")
                                })
-         | 'Write ProductCat BigQuery' >> beam.io.WriteToBigQuery(table=olist_dataset_options.project_nm+':olist_demo_dataset.olist_order',
+         | 'Write ProductCat BigQuery' >> beam.io.WriteToBigQuery(table=str(olist_dataset_options.project)+':olist_demo_dataset.olist_order',
                                                                   schema=SCHEMA,
                                                                   write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND)
          )

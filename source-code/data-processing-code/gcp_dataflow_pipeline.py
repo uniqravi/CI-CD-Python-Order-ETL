@@ -3,7 +3,6 @@ import logging
 
 import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions,GoogleCloudOptions
-import datetime
 
 
 class OlistDatasetOptions(PipelineOptions):
@@ -25,6 +24,7 @@ if __name__ == '__main__':
     # pipeline = beam.Pipeline(options=beam_options)
 
     with beam.Pipeline(options=beam_options) as p:
+        import datetime
         olist_dataset_options = beam_options.view_as(OlistDatasetOptions)
         cloud_option = beam_options.view_as(GoogleCloudOptions)
         SCHEMA = 'order_id:String,customer_id:STRING,order_status:STRING,order_purchase_timestamp:DATETIME,' \

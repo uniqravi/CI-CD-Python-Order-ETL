@@ -30,7 +30,7 @@ resources:
         - name: customer_id
           type: STRING
         - name: order_status
-          type: INTEGER
+          type: STRING
         - name: order_purchase_timestamp
           type: DATETIME
         - name: order_approved_at

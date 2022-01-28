@@ -27,14 +27,14 @@ if __name__ == '__main__':
     with beam.Pipeline(options=beam_options) as p:
         olist_dataset_options = beam_options.view_as(OlistDatasetOptions)
         cloud_option = beam_options.view_as(GoogleCloudOptions)
-        SCHEMA = 'order_id:String,customer_id:STRING,order_status:INTEGER,order_purchase_timestamp:DATETIME,' \
+        SCHEMA = 'order_id:String,customer_id:STRING,order_status:STRING,order_purchase_timestamp:DATETIME,' \
                  'order_approved_at:DATETIME,order_delivered_carrier_date:DATETIME,' \
                  'order_delivered_customer_date:DATETIME,order_estimated_delivery_date:DATETIME'
         (p | 'Read files' >> beam.io.ReadFromText(olist_dataset_options.input, skip_header_lines=1)
          | 'Split' >> beam.Map(lambda x: x.split(','))
          | 'Filter Blank Row' >> beam.Filter(lambda x: x[0] != '' and x[1] != '')
-         | 'Making product Dict Map' >> beam.Map(
-                    lambda x: {'order_id': x[0], 'customer_id': x[1], 'order_status': int(x[2]),
+         | 'Making Order Dict Map' >> beam.Map(
+                    lambda x: {'order_id': x[0], 'customer_id': x[1], 'order_status': x[2],
                                'order_purchase_timestamp': datetime.strptime(x[3], "%y-%m-%d %H:%M:%S"),
                                'order_approved_at': datetime.strptime(x[4], "%y-%m-%d %H:%M:%S"),
                                'order_delivered_carrier_date': datetime.strptime(x[5], "%y-%m-%d %H:%M:%S"),

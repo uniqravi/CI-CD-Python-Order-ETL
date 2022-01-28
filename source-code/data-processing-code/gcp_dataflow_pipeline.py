@@ -35,11 +35,11 @@ if __name__ == '__main__':
          | 'Filter Blank Row' >> beam.Filter(lambda x: x[0] != '' and x[1] != '')
          | 'Making Order Dict Map' >> beam.Map(
                     lambda x: {'order_id': x[0], 'customer_id': x[1], 'order_status': x[2],
-                               'order_purchase_timestamp': datetime.strptime(x[3], "%y-%m-%d %H:%M:%S"),
-                               'order_approved_at': datetime.strptime(x[4], "%y-%m-%d %H:%M:%S"),
-                               'order_delivered_carrier_date': datetime.strptime(x[5], "%y-%m-%d %H:%M:%S"),
-                               'order_delivered_customer_date': datetime.strptime(x[6], "%y-%m-%d %H:%M:%S"),
-                               'order_estimated_delivery_date': datetime.strptime(x[7], "%y-%m-%d %H:%M:%S")
+                               'order_purchase_timestamp': datetime.datetime.strptime(x[3], "%y-%m-%d %H:%M:%S"),
+                               'order_approved_at': datetime.datetime.strptime(x[4], "%y-%m-%d %H:%M:%S"),
+                               'order_delivered_carrier_date': datetime.datetime.strptime(x[5], "%y-%m-%d %H:%M:%S"),
+                               'order_delivered_customer_date': datetime.datetime.strptime(x[6], "%y-%m-%d %H:%M:%S"),
+                               'order_estimated_delivery_date': datetime.datetime.strptime(x[7], "%y-%m-%d %H:%M:%S")
                                })
          | 'Write ProductCat BigQuery' >> beam.io.WriteToBigQuery(
                     table=str(cloud_option.project) + ':olist_demo_dataset.olist_order',

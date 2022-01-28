@@ -19,7 +19,7 @@ steps:
   dir: '${_REPO_NM}/source-code/data-processing-code/'
 - name: gcr.io/cloud-builders/gcloud
   args: ['functions','deploy','${_CLOUD_FUNCTION_NM}','--project','${_PROJECT_NM}','--region','${_REGION_NM}','--runtime=python37','--entry-point',
-         'temp_trigger_etl_flow','--set-env-vars PROJECT_NM=${_PROJECT_NM},TEMPLATE_LOC=${_DATAFLOW_TEMPLATE_LOCATION},TEMP_LOC=${_DATAFLOW_TEMP_LOCATION},LOCATION=${_REGION_NM},ETL_NM=${_PIPELINE_TITLE}',
+         'temp_trigger_etl_flow','--update-env-vars PROJECT_NM=${_PROJECT_NM},TEMPLATE_LOC=${_DATAFLOW_TEMPLATE_LOCATION},TEMP_LOC=${_DATAFLOW_TEMP_LOCATION},LOCATION=${_REGION_NM},ETL_NM=${_PIPELINE_TITLE}',
          '--trigger-resource','${_BUCKET_SOURCE_NM}','--trigger-event','google.storage.object.finalize']
   dir: '${_REPO_NM}/source-code/cloud-functions/'
   id: 'deploy cloud function'

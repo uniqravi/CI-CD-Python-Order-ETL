@@ -2,7 +2,7 @@ import argparse
 import logging
 
 import apache_beam as beam
-from apache_beam.options.pipeline_options import PipelineOptions
+from apache_beam.options.pipeline_options import PipelineOptions,GoogleCloudOptions
 import datetime
 
 
@@ -15,6 +15,10 @@ class OlistDatasetOptions(PipelineOptions):
             '--input',
             default='gs://dataflow-samples/shakespeare/kinglear.txt',
             help='Path of the file to read from')
+        parser.add_argument(
+            '--project',
+            default='gcp-learning-333002',
+            help='project id')
 
 
 if __name__ == '__main__':
@@ -26,7 +30,7 @@ if __name__ == '__main__':
 
     with beam.Pipeline(options=beam_options) as p:
         olist_dataset_options = beam_options.view_as(OlistDatasetOptions)
-
+        cloud_option = beam_options.view_as(GoogleCloudOptions)
         SCHEMA = 'order_id:String,customer_id:STRING,order_status:INTEGER,order_purchase_timestamp:DATETIME,' \
                  'order_approved_at:DATETIME,order_delivered_carrier_date:DATETIME,' \
                  'order_delivered_customer_date:DATETIME,order_estimated_delivery_date:DATETIME'
@@ -42,7 +46,7 @@ if __name__ == '__main__':
                                'order_estimated_delivery_date': datetime.strptime(x[7], "%y-%m-%d %H:%M:%S")
                                })
          | 'Write ProductCat BigQuery' >> beam.io.WriteToBigQuery(
-                    table=str(olist_dataset_options.project) + ':olist_demo_dataset.olist_order',
+                    table=str(cloud_option.project) + ':olist_demo_dataset.olist_order',
                     schema=SCHEMA,
                     write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND)
          )

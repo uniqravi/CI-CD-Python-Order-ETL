@@ -15,10 +15,6 @@ class OlistDatasetOptions(PipelineOptions):
             '--input',
             default='gs://dataflow-samples/shakespeare/kinglear.txt',
             help='Path of the file to read from')
-        parser.add_argument(
-            '--project',
-            default='gcp-learning-333002',
-            help='project id')
 
 
 if __name__ == '__main__':

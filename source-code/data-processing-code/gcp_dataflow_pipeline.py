@@ -43,7 +43,7 @@ if __name__ == '__main__':
         (p | 'Read files' >> beam.io.ReadFromText(olist_dataset_options.input, skip_header_lines=1)
          | 'Split' >> beam.Map(lambda x: x.split(','))
          | 'Filter Blank Row' >> beam.Filter(lambda x: x[0] != '' and x[1] != '')
-         | 'Making Order Dict Map' >> beam.ParDo(ParseRowToBigQuery)
+         | 'Making Order Dict Map' >> beam.ParDo(ParseRowToBigQuery())
          | 'Write ProductCat BigQuery' >> beam.io.WriteToBigQuery(
                     table=str(cloud_option.project) + ':olist_demo_dataset.olist_order',
                     schema=SCHEMA,

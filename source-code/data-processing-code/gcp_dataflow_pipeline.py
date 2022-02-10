@@ -1,8 +1,19 @@
 import argparse
 import logging
-
 import apache_beam as beam
-from apache_beam.options.pipeline_options import PipelineOptions,GoogleCloudOptions
+from apache_beam.options.pipeline_options import PipelineOptions, GoogleCloudOptions
+
+
+class ParseRowToBigQuery(beam.DoFn):
+    def process(self, element):
+        from datetime import datetime
+        return [{'order_id': element[0], 'customer_id': element[1], 'order_status': element[2],
+                 'order_purchase_timestamp': datetime.datetime.strptime(element[3], "%y-%m-%d %H:%M:%S"),
+                 'order_approved_at': datetime.datetime.strptime(element[4], "%y-%m-%d %H:%M:%S"),
+                 'order_delivered_carrier_date': datetime.datetime.strptime(element[5], "%y-%m-%d %H:%M:%S"),
+                 'order_delivered_customer_date': datetime.datetime.strptime(element[6], "%y-%m-%d %H:%M:%S"),
+                 'order_estimated_delivery_date': datetime.datetime.strptime(element[7], "%y-%m-%d %H:%M:%S")
+                 }]
 
 
 class OlistDatasetOptions(PipelineOptions):
@@ -24,7 +35,6 @@ if __name__ == '__main__':
     # pipeline = beam.Pipeline(options=beam_options)
 
     with beam.Pipeline(options=beam_options) as p:
-        import datetime
         olist_dataset_options = beam_options.view_as(OlistDatasetOptions)
         cloud_option = beam_options.view_as(GoogleCloudOptions)
         SCHEMA = 'order_id:String,customer_id:STRING,order_status:STRING,order_purchase_timestamp:DATETIME,' \
@@ -33,14 +43,7 @@ if __name__ == '__main__':
         (p | 'Read files' >> beam.io.ReadFromText(olist_dataset_options.input, skip_header_lines=1)
          | 'Split' >> beam.Map(lambda x: x.split(','))
          | 'Filter Blank Row' >> beam.Filter(lambda x: x[0] != '' and x[1] != '')
-         | 'Making Order Dict Map' >> beam.Map(
-                    lambda x: {'order_id': x[0], 'customer_id': x[1], 'order_status': x[2],
-                               'order_purchase_timestamp': datetime.datetime.strptime(x[3], "%y-%m-%d %H:%M:%S"),
-                               'order_approved_at': datetime.datetime.strptime(x[4], "%y-%m-%d %H:%M:%S"),
-                               'order_delivered_carrier_date': datetime.datetime.strptime(x[5], "%y-%m-%d %H:%M:%S"),
-                               'order_delivered_customer_date': datetime.datetime.strptime(x[6], "%y-%m-%d %H:%M:%S"),
-                               'order_estimated_delivery_date': datetime.datetime.strptime(x[7], "%y-%m-%d %H:%M:%S")
-                               })
+         | 'Making Order Dict Map' >> beam.ParDo(ParseRowToBigQuery)
          | 'Write ProductCat BigQuery' >> beam.io.WriteToBigQuery(
                     table=str(cloud_option.project) + ':olist_demo_dataset.olist_order',
                     schema=SCHEMA,

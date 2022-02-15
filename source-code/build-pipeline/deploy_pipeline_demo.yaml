@@ -38,8 +38,8 @@ substitutions:
   _DATAFLOW_TEMP_LOCATION: ${_DATAFLOW_TEMPLATE_DIR}/temp
   _DATAFLOW_TEMPLATE_LOCATION : ${_DATAFLOW_TEMPLATE_DIR}/template/${_DATAFLOW_TEMPLATE_FILE_NM}
   _REGION_NM : us-west1
-  _CLOUD_FUNCTION_NM : trigger_etl_cloud_fn
-  _BUCKET_SOURCE_NM : gs://olist_order_bucket_etl
+  _CLOUD_FUNCTION_NM : trigger_etl_cloud_fn1
+  _BUCKET_SOURCE_NM : gs://olist_order_bucket_etl1
 
 
   #name: gcr.io/cloud-builders/gsutil

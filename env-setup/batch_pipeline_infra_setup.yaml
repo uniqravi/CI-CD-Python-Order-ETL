@@ -41,10 +41,10 @@ resources:
           type: DATETIME
         - name: order_estimated_delivery_date
           type: DATETIME
-  - name: olist_order_bucket_etl
+  - name: olist_order_bucket_etl1
     type: create_bucket.py
     properties:
-      name: olist_order_bucket_etl
+      name: olist_order_bucket_etl1
       location: us-west1
       versioning:
         enabled: False

@@ -8,11 +8,11 @@ class ParseRowToBigQuery(beam.DoFn):
     def process(self, element):
         from datetime import datetime
         return [{'order_id': element[0], 'customer_id': element[1], 'order_status': element[2],
-                 'order_purchase_timestamp': datetime.datetime.strptime(element[3], "%y-%m-%d %H:%M:%S"),
-                 'order_approved_at': datetime.datetime.strptime(element[4], "%y-%m-%d %H:%M:%S"),
-                 'order_delivered_carrier_date': datetime.datetime.strptime(element[5], "%y-%m-%d %H:%M:%S"),
-                 'order_delivered_customer_date': datetime.datetime.strptime(element[6], "%y-%m-%d %H:%M:%S"),
-                 'order_estimated_delivery_date': datetime.datetime.strptime(element[7], "%y-%m-%d %H:%M:%S")
+                 'order_purchase_timestamp': datetime.strptime(element[3], "%y-%m-%d %H:%M:%S"),
+                 'order_approved_at': datetime.strptime(element[4], "%y-%m-%d %H:%M:%S"),
+                 'order_delivered_carrier_date': datetime.strptime(element[5], "%y-%m-%d %H:%M:%S"),
+                 'order_delivered_customer_date': datetime.strptime(element[6], "%y-%m-%d %H:%M:%S"),
+                 'order_estimated_delivery_date': datetime.strptime(element[7], "%y-%m-%d %H:%M:%S")
                  }]
 
 

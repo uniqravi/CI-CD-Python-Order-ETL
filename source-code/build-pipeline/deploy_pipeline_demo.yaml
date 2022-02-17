@@ -30,7 +30,7 @@ options:
 substitutions:
   _PIPELINE_TITLE : GCP_ORDER_ETL
   _REPO_NM : CI-CD-Python-Order-ETL #default value
-  _PROJECT_NM : gcp-cep-g25-330206
+  _PROJECT_NM : gcp-learninng
   _PYTHON_DATA_PIPELINE_FILE_NM : gcp_dataflow_pipeline
   _DATAFLOW_TEMPLATE_DIR : gs://gcp_etl_project2/dataflow_templates/order
   _DATAFLOW_TEMPLATE_FILE_NM : GCP_ORDER_ETL

@@ -23,7 +23,7 @@ steps:
          '--trigger-resource','${_BUCKET_SOURCE_NM}','--trigger-event','google.storage.object.finalize']
   dir: '${_REPO_NM}/source-code/cloud-functions/'
   id: 'deploy cloud function'
-logsBucket: 'gs://gcp_etl_project/buildlogs'
+logsBucket: 'gs://gcp_etl_project2/buildlogs'
 options:
   logging: GCS_ONLY
   dynamic_substitutions: true

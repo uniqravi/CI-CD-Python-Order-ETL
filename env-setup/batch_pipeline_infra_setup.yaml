@@ -6,6 +6,7 @@ imports:
   name: create_big_query_table.py
 - path: create_bucket.py
   name: create_bucket.py
+
 #- path: compute-engine-template.py : gcp-learning-333002@appspot.gserviceaccount.com
 
 resources:
@@ -41,12 +42,13 @@ resources:
           type: DATETIME
         - name: order_estimated_delivery_date
           type: DATETIME
-  - name: olist_order_bucket_etl1
+  - name: olist_order_bucket_etl2
     type: create_bucket.py
     properties:
-      name: olist_order_bucket_etl1
+      name: olist_order_bucket_etl2
       location: us-west1
       versioning:
         enabled: False
       labels:
           env: development
+

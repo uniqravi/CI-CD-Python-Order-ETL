@@ -32,14 +32,14 @@ substitutions:
   _REPO_NM : CI-CD-Python-Order-ETL #default value
   _PROJECT_NM : gcp-cep-g25-330206
   _PYTHON_DATA_PIPELINE_FILE_NM : gcp_dataflow_pipeline
-  _DATAFLOW_TEMPLATE_DIR : gs://gcp_etl_project1/dataflow_templates/order
+  _DATAFLOW_TEMPLATE_DIR : gs://gcp_etl_project2/dataflow_templates/order
   _DATAFLOW_TEMPLATE_FILE_NM : GCP_ORDER_ETL
   _DATAFLOW_STAGE_LOCATION: ${_DATAFLOW_TEMPLATE_DIR}/staging
   _DATAFLOW_TEMP_LOCATION: ${_DATAFLOW_TEMPLATE_DIR}/temp
   _DATAFLOW_TEMPLATE_LOCATION : ${_DATAFLOW_TEMPLATE_DIR}/template/${_DATAFLOW_TEMPLATE_FILE_NM}
   _REGION_NM : us-west1
-  _CLOUD_FUNCTION_NM : trigger_etl_cloud_fn1
-  _BUCKET_SOURCE_NM : gs://olist_order_bucket_etl1
+  _CLOUD_FUNCTION_NM : trigger_etl_cloud_fn2
+  _BUCKET_SOURCE_NM : gs://olist_order_bucket_etl2
 
 
   #name: gcr.io/cloud-builders/gsutil
